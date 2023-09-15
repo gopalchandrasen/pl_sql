@@ -1,0 +1,14 @@
+create or replace trigger t3
+before update on salary
+for each row
+when(new.salary<0)
+declare
+x number(5);
+y number(5);
+begin
+x:=:new.salary;
+y:=:new.id;
+insert into loan_tab values(y,-x);
+:new.salary:=:old.salary-x;
+end;
+/

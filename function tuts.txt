@@ -1,0 +1,27 @@
+create or replace function avg_3(x in number, y in number, z in number) 
+return number 
+is
+
+r number(7,2);
+begin 
+r:=(x+y+z)/3;
+return r;
+
+end;
+/
+
+declare
+a number(5);
+b number(5);
+c number(5);
+r number(7,2);
+begin
+a:=&a;
+b:=&b;
+c:=&c;
+dbms_output.put_line('The average is '||avg_3(a,b,c));
+end;
+/
+
+
+

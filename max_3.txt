@@ -1,0 +1,27 @@
+create or replace function
+max_3(a in out number,b in out number,c in out number)
+return number
+is 
+begin
+if (a>b and a>c) then
+return a;
+elsif(b>a and b>c)then
+return b;
+else
+return c;
+end if;
+end;
+/
+
+declare
+a number(10,2);
+b number(10,2);
+c number(10,2);
+begin
+a:=&a;
+b:=&b;
+c:=&c;
+
+dbms_output.put_line('The max number among '||a||' ,'||b||' ,'||' ,'||c ||' is '||max_3(a,b,c));
+end;
+/

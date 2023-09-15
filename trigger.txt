@@ -1,0 +1,26 @@
+create or replace trigger t2
+before update on salary
+for each row
+when(new.salary<0)
+declare
+x number(5);
+y number(5);
+begin
+x:=:new.salary;
+y:=:new.id; 
+insert into backup_salary values(y,-x);
+:new.salary:=0;
+end;
+/
+
+
+
+create or replace trigger t2
+after delete on bank
+for each row
+begin
+insert into loan values(:old.id,:old.amount);
+end;
+/
+
+create or 

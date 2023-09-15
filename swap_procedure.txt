@@ -1,0 +1,21 @@
+create or replace procedure swap(x in out number, y in out number)
+is
+temp number(5);
+begin
+temp:=x;
+x:=y;
+y:=temp;
+end;
+/
+
+declare
+a number(5);
+b number(5);
+begin
+a:=&a;
+b:=&b;
+dbms_output.put_line('Before swapping The value of 1st number is '||a||' and '||'The value of 2nd number is '||b);
+swap(a,b);
+dbms_output.put_line('After swapping The value of 1st number is '||a||' and '||'The value of 2nd number is '||b);
+end;
+/

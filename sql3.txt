@@ -1,0 +1,17 @@
+declare
+cursor c is select eno,salary from employe where deptnum=5;
+x employe.eno%type;
+y employe.salary%type;
+z employe.salary%type;
+begin
+open c;
+loop
+fetch c into x,y;
+exit when c%notfound;
+z:=y*1.1;
+update employe set salary=z where eno=x;
+z:=z-y;
+insert into raise_salary values(x,y,z);
+end loop;
+end;
+/                       

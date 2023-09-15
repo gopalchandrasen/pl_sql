@@ -1,0 +1,26 @@
+create or replace procedure root_method(x in number,y in number,z in number,rt1 out number,rt2 out number)
+is
+p number(10,2);
+
+begin
+p:=sqrt(y*y-4*x*z);
+rt1:=(-y+p)/2*x;
+rt2:=(-y-p)/2*x;
+
+end;
+/
+
+declare
+a number(5);
+b number(5);
+c number(5);
+m number(5);
+n number(5);
+begin
+a:=&a;
+b:=&b;
+c:=&c;
+root_method(a,b,c,m,n);
+dbms_output.put_line('The roots are: '||m||' and '||n);
+end;
+/

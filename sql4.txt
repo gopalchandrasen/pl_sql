@@ -1,0 +1,23 @@
+declare
+cursor c is select  roll,mca401,mca402,mca403 from attendance;
+w attendance.roll %type;
+x attendance.mca401%type;
+y attendance.mca402%type;
+z attendance.mca403%type;
+a number(5);
+co number(5);
+begin
+open c;
+loop
+fetch c into w,x,y,z;
+exit when c%notfound;
+a:=(x+y+z)/3;
+if (a<70) then
+co:=sql%rowcount; 
+insert into not_eligible values(w,a);
+end if;
+end loop;
+close c;
+dbms_output.put_line('Number of data to get is'||co);
+end;
+/

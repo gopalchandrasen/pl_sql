@@ -1,0 +1,17 @@
+declare
+cursor c_emp is select eno,ename,salary from employe;
+e_no employe.eno%type;
+e_name employe.ename%type;
+e_sal employe.salary%type;
+begin
+open c_emp;
+loop
+fetch c_emp into e_no,e_name,e_sal;
+exit when c_emp%notfound;
+dbms_output.put_line(e_no||' '||e_name||' '||e_sal);
+
+--exit when c_emp%notfound;
+end loop;
+close c_emp;
+end;
+/

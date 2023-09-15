@@ -1,0 +1,15 @@
+create or replace procedure studnt
+is 
+begin
+for n in (select roll,name,city from student where city='bankok')
+loop
+insert into student_kolkata values (n.roll,n.name,n.city);
+end loop;
+end;
+/
+
+
+begin
+studnt;
+end;
+/

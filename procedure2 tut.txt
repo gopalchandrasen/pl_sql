@@ -1,0 +1,41 @@
+create or replace procedure ad(x in number,y in number, z out number)
+is
+begin
+z:=x+y;
+end;
+/
+
+declare
+a number(5);
+b number(5);
+c number(5);
+begin
+a:=&a;
+b:=&b;
+ad(a,b,c);
+dbms_output.put_line(c);
+end;
+/
+
+
+create or replace function adf(x in number,y in number,z in number)
+return number
+is
+r number(5);
+begin
+r:=x+y+z;
+return r;
+end;
+/
+
+declare
+a number(5);
+b number(5);
+c number(5);
+begin
+a:=&a;
+b:=&b;
+c:=&c;
+dbms_output.put_line(adf(a,b,c));
+end;
+/

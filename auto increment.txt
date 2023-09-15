@@ -1,0 +1,44 @@
+create sequence auto_inc increment by 1 start with 1;
+
+create or replace trigger student_insert 
+before insert on student
+for each row 
+declare 
+x number(5);
+begin
+select auto_roll.nextval into x from dual;
+:new.roll:=x;
+end;
+/
+
+create or replace trigger tr2
+before insert on Item1
+for each row
+declare
+x Item1.I_code%type;
+begin
+select 'IT'||TO_CHAR(auto_inc.nextval,'fm000')into x from dual;
+:new.I_code:=x;
+end;
+/
+
+
+insert into Item1(I_name,price) values('shoe',500);
+insert into Item2(I_name,price) values('snickers',800);
+insert into Item2(I_name,price) values('bat',6000);
+insert into Item1(I_name,price) values('Pad',5500);
+
+create or replace trigger tr4 
+before insert on item1
+for each row
+follows trigger tr2
+declare
+x item1.price%type;
+begin
+x:=:new.price;
+if x<4000 then
+:new.price:=4000;
+insert into old_price_table values(:new.i_code,sysdate,x);
+end if;
+end;
+/
